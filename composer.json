@@ -7,7 +7,7 @@
     "require": {
     },
     "type": "magento2-module",
-    "version": "dev-apple-pay",
+    "version": "dev-master",
     "autoload": {
         "files": [
             "registration.php"
