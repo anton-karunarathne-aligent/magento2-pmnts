@@ -1,5 +1,8 @@
 <?php
 /**
+ * phpcs:ignoreFile
+ */
+/**
 * Fat Zebra PHP Gateway Library
 *
 * The original source for this library, including its tests can be found at
@@ -12,7 +15,7 @@
 *
 * @package FatZebra
 */
-namespace FatZebra;
+namespace PMNTS\Gateway\Model;
 
 class Helpers
 {
@@ -46,8 +49,8 @@ class Helpers
     public static function toASCII($str)
     {
         return strtr(
-            utf8_decode($str),
-            utf8_decode('ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ'),
+            mb_convert_encoding($str ?? '', 'ISO-8859-1', 'UTF-8'),
+            mb_convert_encoding('ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ', 'ISO-8859-1', 'UTF-8'),
             'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy'
         );
     }

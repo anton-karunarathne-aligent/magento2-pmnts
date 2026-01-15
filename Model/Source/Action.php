@@ -1,5 +1,8 @@
 <?php
 /**
+ * phpcs:ignoreFile
+ */
+/**
  * Payment CC Types Source Model
  *
  * @category    PMNTS

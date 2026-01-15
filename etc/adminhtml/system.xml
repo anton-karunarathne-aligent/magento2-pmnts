@@ -137,6 +137,27 @@
                         <field id="fraud_detection_enabled">1</field>
                     </depends>
                 </field>
+                <!-- Apple Pay -->
+                <field id="heading_apple_pay" translate="label" sortOrder="2000" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apple Pay Configuration</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="applepay_active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="2005" translate="label" type="select">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <config_path>payment/fatzebra_applepay/active</config_path>
+                </field>
+                <field id="applepay_merchant_name" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="2010" translate="label" type="text">
+                    <label>Merchant Name</label>
+                    <comment>The merchant name displayed in the Apple Pay payment sheet.</comment>
+                    <config_path>payment/fatzebra_applepay/merchant_name</config_path>
+                </field>
+                <field id="applepay_merchant_country" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="2020" translate="label" type="select">
+                    <label>Merchant Country</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <comment>Select the country where your Apple Pay merchant account is registered.</comment>
+                    <config_path>payment/fatzebra_applepay/merchant_country</config_path>
+                </field>
             </group>
         </section>
     </system>

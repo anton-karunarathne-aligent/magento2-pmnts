@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phpcs:ignoreFile
+ */
 namespace PMNTS\Gateway\Model\Ui;
 
 use Magento\Vault\Api\Data\PaymentTokenInterface;

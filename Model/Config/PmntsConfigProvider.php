@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phpcs:ignoreFile
+ */
 namespace PMNTS\Gateway\Model\Config;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
@@ -54,7 +56,8 @@ class PmntsConfigProvider implements ConfigProviderInterface
                     'isSandbox' => $this->getIsSandbox(),
                     'canSaveCard' => $this->canSaveCard(),
                     'customerHasSavedCC' => $this->customerHasSavedCC(),
-                    'ccVaultCode' => \PMNTS\Gateway\Helper\Data::VAULT_METHOD_CODE
+                    'ccVaultCode' => \PMNTS\Gateway\Helper\Data::VAULT_METHOD_CODE,
+                    'allowedCardTypes' => $this->getAllowedCardTypes()
                 ]
             ]
         ];
@@ -114,6 +117,20 @@ class PmntsConfigProvider implements ConfigProviderInterface
     {
         $customer = $this->currentCustomer->getCustomerId();
         return !is_null($customer) && $this->scopeConfig->getValue('payment/pmnts_gateway_vault/active', 'stores');
+    }
+
+    /**
+     * Get the allowed card types
+     *
+     * @return string[]
+     */
+    private function getAllowedCardTypes()
+    {
+        $supportedCards = $this->getConfigValue('cctypes');
+        if (!$supportedCards) {
+            return [];
+        }
+        return explode(',', $supportedCards);
     }
 
     private function customerHasSavedCC()

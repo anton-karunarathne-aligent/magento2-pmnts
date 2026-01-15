@@ -1,4 +1,7 @@
 <?php
+/**
+ * phpcs:ignoreFile
+ */
     /**
     * Adapted from Fat Zebra PHP Gateway Library
     * Version 1.1.5
@@ -26,7 +29,7 @@
     */
 namespace PMNTS\Gateway\Model;
 
-use Zend\Http\Client\Adapter\Exception\TimeoutException;
+use Laminas\Http\Client\Adapter\Exception\TimeoutException;
 
 /**
 * The Fat Zebra Gateway class for interfacing with Fat Zebra
@@ -136,6 +139,45 @@ class Gateway
         if (!is_null($fraud_data)) {
             $payload['fraud'] = $fraud_data;
         }
+        return $this->do_request("POST", "/purchases", $payload);
+    }
+
+    /**
+     * Performs a purchase against the FatZebra gateway with a wallet
+     *
+     * @param float $amount the purchase amount
+     * @param string $reference the purchase reference
+     * @param string $type the wallet type.
+     * @param array $wallet the wallet payload provided by the wallet service.
+     * @param string $currency the currency code for the transaction. Defaults to AUD
+     * @return array
+     */
+    public function wallet_purchase(
+        float $amount,
+        string $reference,
+        string $type,
+        array $wallet,
+        string $currency = "AUD"
+    ): array {
+        $customer_ip = $this->get_customer_ip();
+
+        if (function_exists('bcmul')) {
+            $int_amount = intval(bcmul($amount, 100));
+        } else {
+            $multiplied = round($amount * 100);
+            $int_amount = (int)$multiplied;
+        }
+
+        $payload = [
+            "amount" => $int_amount,
+            "reference" => $reference,
+            "customer_ip" => $customer_ip,
+            "currency" => $currency,
+            "wallet" => [
+                "type" => $type,
+                "token" => $wallet
+            ]
+        ];
         return $this->do_request("POST", "/purchases", $payload);
     }
 

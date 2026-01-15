@@ -1,5 +1,8 @@
 <?php
 /**
+ * phpcs:ignoreFile
+ */
+/**
  * Capture command (with tokenization if opted-in by customer)
  *
  * @category    PMNTS

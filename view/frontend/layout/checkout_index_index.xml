@@ -10,6 +10,11 @@
 */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- Apple Pay JS SDK -->
+        <script src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js" src_type="url" crossorigin="anonymous"/>
+        <css src="PMNTS_Gateway::css/fz-apple-pay.css"/>
+    </head>
     <body>
         <referenceBlock name="checkout.root">
             <arguments>
@@ -31,6 +36,14 @@
                                                                     <item name="component" xsi:type="string">PMNTS_Gateway/js/view/payment/pmnts-payments</item>
                                                                     <item name="methods" xsi:type="array">
                                                                         <item name="pmnts_gateway" xsi:type="array">
+                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="fatzebra-methods" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">PMNTS_Gateway/js/view/payment/fatzebra-applepay</item>
+                                                                    <item name="methods" xsi:type="array">
+                                                                        <item name="fatzebra_applepay" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                     </item>

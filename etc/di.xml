@@ -72,6 +72,42 @@
         </arguments>
     </virtualType>
 
+    <!-- Apple Pay Config -->
+    <virtualType name="FatZebraApplePayProvider" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">PMNTS\Gateway\Model\ApplePay\ConfigProvider::METHOD_CODE</argument>
+            <argument name="valueHandlerPool" xsi:type="object">FatZebraApplePayValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">FatZebraApplePayCommandPool</argument>
+            <argument name="formBlockType" xsi:type="object">Magento\Payment\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FatZebraApplePayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">FatZebraApplePayConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FatZebraApplePayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">FatZebraApplePayConfig</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FatZebraApplePayConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">PMNTS\Gateway\Model\ApplePay\ConfigProvider::METHOD_CODE</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FatZebraApplePayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="capture" xsi:type="string">PMNTS\Gateway\Gateway\ApplePay\CaptureCommand</item>
+                <item name="refund" xsi:type="string">PMNTS\Gateway\Gateway\RefundCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- End Apple Pay Config -->
     <type name="Magento\Payment\Gateway\Command\CommandManagerPool">
         <arguments>
             <argument name="executors" xsi:type="array">
@@ -94,7 +130,6 @@
 
     <virtualType name="PmntsGatewayLogger" type="Magento\Framework\Logger\Monolog">
         <arguments>
-            <argument name="name" xsi:type="object">pmnts_gateway</argument>
             <argument name="handlers" xsi:type="array">
                 <item name="default" xsi:type="object">PmntsGatewayLoggerHandler</item>
             </argument>
@@ -116,4 +151,11 @@
             <argument name="logger" xsi:type="object">PmntsGatewayLogger</argument>
         </arguments>
     </type>
+    <type name="PMNTS\Gateway\Model\GatewayV2">
+        <arguments>
+            <argument name="logger" xsi:type="object">PmntsGatewayLogger</argument>
+        </arguments>
+    </type>
+    <preference for="PMNTS\Gateway\Api\ApplePaySessionInterface" type="PMNTS\Gateway\Model\Service\ApplePaySessionService"/>
+    <preference for="PMNTS\Gateway\Api\Data\ApplePaySessionRequestInterface" type="PMNTS\Gateway\Model\Api\Data\ApplePaySessionRequest"/>
 </config>

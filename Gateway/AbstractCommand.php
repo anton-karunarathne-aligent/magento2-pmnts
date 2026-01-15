@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phpcs:ignoreFile
+ */
 namespace PMNTS\Gateway\Gateway;
 
 abstract class AbstractCommand implements \Magento\Payment\Gateway\CommandInterface

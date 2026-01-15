@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phpcs:ignoreFile
+ */
 namespace PMNTS\Gateway\Observer;
 
 class AssignDataObserver extends \Magento\Payment\Observer\AbstractDataAssignObserver

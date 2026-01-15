@@ -1,4 +1,7 @@
 <?php
+/**
+ * phpcs:ignoreFile
+ */
 namespace PMNTS\Gateway\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
@@ -126,7 +129,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             "customer" => [
                     "address_1" => $this->cleanForFraud($billing->getStreetLine(1) . ' ' . $billing->getStreetLine(2), self::RE_ANS, 30),
                     "city" => $this->cleanForFraud($billing->getCity(), self::RE_ANS, 20),
-                    "country" => \FatZebra\Helpers::iso3166_alpha3($billing->getCountryId()),
+                    "country" => \PMNTS\Gateway\Model\Helpers::iso3166_alpha3($billing->getCountryId()),
                     "created_at" => $customerCreatedAt,
                     "date_of_birth" => $customerDob,
                     "email" => $order->getCustomerEmail(),
@@ -143,7 +146,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 [
                     "address_1" => $this->cleanForFraud($billing->getStreetLine(1) . ' ' . $billing->getStreetLine(2), self::RE_ANS, 30),
                     "city" => $this->cleanForFraud($billing->getCity(), self::RE_ANS, 20),
-                    "country" => \FatZebra\Helpers::iso3166_alpha3($billing->getCountryId()),
+                    "country" => \PMNTS\Gateway\Model\Helpers::iso3166_alpha3($billing->getCountryId()),
                     "email" => $billing->getEmail(),
                     "first_name" => $this->cleanForFraud($billing->getFirstname(), self::RE_ANS, 30),
                     "last_name" => $this->cleanForFraud($billing->getLastname(), self::RE_ANS, 30),
@@ -159,7 +162,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $fraudData["shipping_address"] = [
                 "address_1" => $this->cleanForFraud($shipping->getStreetLine(1) . ' ' . $shipping->getStreetLine(2), self::RE_ANS, 30),
                 "city" => $this->cleanForFraud($shipping->getCity(), self::RE_ANS, 20),
-                "country" => \FatZebra\Helpers::iso3166_alpha3($billing->getCountryId()),
+                "country" => \PMNTS\Gateway\Model\Helpers::iso3166_alpha3($billing->getCountryId()),
                 "email" => $shipping->getEmail(),
                 "first_name" => $this->cleanForFraud($shipping->getFirstname(), self::RE_ANS, 30),
                 "last_name" => $this->cleanForFraud($shipping->getLastname(), self::RE_ANS, 30),
@@ -174,7 +177,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function cleanForFraud($data, $pattern, $maxlen, $trimDirection = 'right')
     {
-        $data = preg_replace($pattern, '', \FatZebra\Helpers::toASCII($data));
+        $data = preg_replace($pattern, '', \PMNTS\Gateway\Model\Helpers::toASCII($data));
         $data = preg_replace('/[\r\n]/', ' ', $data);
         if (strlen($data) > $maxlen) {
             if ($trimDirection == 'right') {
@@ -216,12 +219,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $shipping = $order->getShippingMethod();
 
-        $methodLowcost = explode(',', $this->getConfigData('fraud_ship_lowcost', $order->getStoreId()));
-        $methodOvernight = explode(',', $this->getConfigData('fraud_ship_overnight', $order->getStoreId()));
-        $methodSameday = explode(',', $this->getConfigData('fraud_ship_sameday', $order->getStoreId()));
-        $methodPickup = explode(',', $this->getConfigData('fraud_ship_pickup', $order->getStoreId()));
-        $methodExpress = explode(',', $this->getConfigData('fraud_ship_express', $order->getStoreId()));
-        $methodInternational = explode(',', $this->getConfigData('fraud_ship_international', $order->getStoreId()));
+        $methodLowcost = explode(',', $this->getConfigData('fraud_ship_lowcost', $order->getStoreId()) ?? '');
+        $methodOvernight = explode(',', $this->getConfigData('fraud_ship_overnight', $order->getStoreId()) ?? '');
+        $methodSameday = explode(',', $this->getConfigData('fraud_ship_sameday', $order->getStoreId()) ?? '');
+        $methodPickup = explode(',', $this->getConfigData('fraud_ship_pickup', $order->getStoreId()) ?? '');
+        $methodExpress = explode(',', $this->getConfigData('fraud_ship_express', $order->getStoreId()) ?? '');
+        $methodInternational = explode(',', $this->getConfigData('fraud_ship_international', $order->getStoreId()) ?? '');
 
         if (in_array($shipping, $methodLowcost)) {
             return 'low_cost';

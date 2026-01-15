@@ -1,0 +1,24 @@
+.fz-pmnt-title-apple-pay {
+    display: flex;
+    align-items: center;
+}
+.fz-pmnt-title-apple-pay .fz-apple-pay-logo-wrapper {
+    display: flex;
+}
+.fz-pmnt-title-apple-pay .fz-apple-pay-label {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.fz-pmnt-content-apple-pay .fz-applepay-button-container {
+    margin-top: 1rem;
+}
+.fz-pmnt-content-apple-pay .fz-applepay-button-container apple-pay-button {
+    --apple-pay-button-width: 200px;
+    --apple-pay-button-height: 40px;
+}

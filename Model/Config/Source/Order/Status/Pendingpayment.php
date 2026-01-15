@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phpcs:ignoreFile
+ */
 namespace PMNTS\Gateway\Model\Config\Source\Order\Status;
 
 use Magento\Sales\Model\Order;

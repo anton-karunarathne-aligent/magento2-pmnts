@@ -75,3 +75,54 @@ The Fraud Screening has a set of shipping type codes which need to be matched ag
 * other
 
 If nothing matches when mapping these values to the shipping methods used by your store we recommend using the closest available mapping (e.g. Flat Rate/Fixed would be mapped to low_cost, Click&Collect would be pickup), or choose other and inform our support team so that the appropriate rules, where applicable, can be updated.
+
+Apple Pay Integration
+---------------------
+
+This module supports Apple Pay payments via Fat Zebra's Wallet API for Luma (standard Magento checkout).
+
+### Apple Pay JS SDK
+
+**Version:** `3` (ApplePaySession version)
+
+The Apple Pay JS SDK is loaded via Apple's CDN:
+```
+https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js
+```
+
+### Configuration
+
+Navigate to **Stores > Configuration > Sales > Payment Methods > PMNTS > Apple Pay Configurations**
+
+| Setting | Description |
+|---------|-------------|
+| `Enabled` | Enable/disable Apple Pay |
+| `Merchant Name` | Display name shown in Apple Pay payment sheet |
+| `Merchant Country` | Two-letter country code (e.g., `AU`, `US`) |
+
+### Apple Pay Button Customization
+
+The Apple Pay button uses the native `<apple-pay-button>` web component. List of customisation options are visible at [Apple Pay Demo site](https://applepaydemo.apple.com/). Configuration is in `view/frontend/web/js/view/payment/method-renderer/applepay.js`:
+
+```javascript
+getApplePayButtonAttributes: function () {
+    return {
+        buttonstyle: 'black',  // Options: 'black', 'white', 'white-outline'
+        type: 'pay',           // Options: 'pay', 'buy', 'plain', 'order', 'donate', 'continue', 'check-out'
+        locale: this.getLocale()
+    };
+}
+```
+
+#### Button Sizing
+
+Button dimensions can be customized via CSS in `view/frontend/web/css/fz-apple-pay.css`:
+
+```css
+.fatzebra-applepay-button-container apple-pay-button {
+    --apple-pay-button-width: 200px;
+    --apple-pay-button-height: 40px;
+    --apple-pay-button-border-radius: 4px;
+    --apple-pay-button-padding: 0 16px;
+}
+```

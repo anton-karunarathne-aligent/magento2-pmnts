@@ -35,6 +35,22 @@
                 <model>PmntsVaultProvider</model>
                 <title>My Saved Cards</title>
             </pmnts_gateway_vault>
+            <fatzebra_applepay>
+                <title>Apple Pay</title>
+                <model>FatZebraApplePayProvider</model>
+                <payment_action>authorize_capture</payment_action>
+                <merchant_name>Online Store</merchant_name>
+                <active>0</active>
+                <merchant_country>AU</merchant_country>
+                <can_use_checkout>1</can_use_checkout>
+                <can_authorize>1</can_authorize>
+                <can_capture>1</can_capture>
+                <can_authorize_vault>0</can_authorize_vault>
+                <can_capture_vault>0</can_capture_vault>
+                <can_refund_partial_per_invoice>1</can_refund_partial_per_invoice>
+                <can_refund>1</can_refund>
+                <sort_order>2</sort_order>
+            </fatzebra_applepay>
         </payment>
     </default>
 </config>

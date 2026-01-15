@@ -1,5 +1,8 @@
 <?php
 /**
+ * phpcs:ignoreFile
+ */
+/**
  * Refund command
  *
  * @category    PMNTS

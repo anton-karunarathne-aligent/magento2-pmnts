@@ -1,5 +1,8 @@
 <?php
 /**
+ * phpcs:ignoreFile
+ */
+/**
  * Vault capture command
  *
  * @category    PMNTS
@@ -43,7 +46,7 @@ class VaultCaptureCommand extends AbstractCommand
      * @param array $commandSubject
      * @return void
      * @throws \Magento\Payment\Gateway\Command\CommandException
-     * @throws \Zend\Http\Client\Adapter\Exception\TimeoutException
+     * @throws \Laminas\Http\Client\Adapter\Exception\TimeoutException
      */
     public function execute(array $commandSubject)
     {
